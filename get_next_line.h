@@ -6,7 +6,7 @@
 /*   By: danielm3 <danielm3@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 08:42:06 by danielm3          #+#    #+#             */
-/*   Updated: 2025/02/24 16:59:03 by danielm3         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:02:34 by danielm3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 200
 # endif
 
 char	*get_next_line(int fd);

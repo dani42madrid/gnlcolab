@@ -6,7 +6,7 @@
 /*   By: danielm3 <danielm3@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:57:02 by danielm3          #+#    #+#             */
-/*   Updated: 2025/02/24 17:56:14 by danielm3         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:05:42 by danielm3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*get_next_line(int fd)
 	char		*temp;
 	ssize_t		readbytes;
 
+	cleanline = "";
 	if (!dirtyline) // esta condición solo se debería dar en la 1ª ejecución
 	{
 		buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char)); // malloc
@@ -39,7 +40,7 @@ char	*get_next_line(int fd)
 			dirtyline = ft_strdup(temp);
 			return (cleanline);
 		}
-		while (!ft_strchr(dirtyline, '\n'))
+		while (!ft_strchr(dirtyline, '\n') && readbytes > 0)
 		{
 			buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char)); // malloc
 			readbytes = read(fd, buffer, BUFFER_SIZE);
