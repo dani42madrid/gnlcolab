@@ -6,7 +6,7 @@
 /*   By: danielm3 <danielm3@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:57:02 by danielm3          #+#    #+#             */
-/*   Updated: 2025/02/24 17:42:29 by danielm3         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:56:14 by danielm3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*get_next_line(int fd)
 	char		*cleanline;
 	char		*remainder;
 	char		*buffer;
+	char		*temp;
 	ssize_t		readbytes;
 
 	if (!dirtyline) // esta condición solo se debería dar en la 1ª ejecución
@@ -32,16 +33,25 @@ char	*get_next_line(int fd)
 		while (ft_strchr(dirtyline, '\n'))
 		{
 			remainder = ft_strchr(dirtyline, '\n');
+			temp = ft_strdup(remainder);
 			cleanline = ft_substr(dirtyline, 0, remainder - dirtyline + 1); // malloc
-			free
-			dirtyline = ft_strdrup(remainder);
-			
+			free(dirtyline);
+			dirtyline = ft_strdup(temp);
 			return (cleanline);
-			
+		}
+		while (!ft_strchr(dirtyline, '\n'))
+		{
+			buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char)); // malloc
+			readbytes = read(fd, buffer, BUFFER_SIZE);
+			if (readbytes > 0)
+			{
+				buffer[readbytes] = '\0';
+				dirtyline = ft_strjoin(dirtyline, buffer);
+			}
+			else
+				return (NULL);
 		}
 	}
-	
-		cleanline = dirtyline;
 	return (cleanline);
 }
 
@@ -57,11 +67,11 @@ int	main(void)
 		return (1);
 	line = get_next_line(fd);
 	printf("%i: %s\n", i++, line);
-/* 	while (line != NULL)
+ 	while (line != NULL)
 	{
 		printf("%i: %s\n", i++, line);
 		line = get_next_line(fd);
-	} */
+	}
 	close(fd);
 	return (0);
 }
