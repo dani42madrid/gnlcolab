@@ -6,7 +6,7 @@
 /*   By: danielm3 <danielm3@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 00:29:25 by danielm3          #+#    #+#             */
-/*   Updated: 2025/02/06 21:41:14 by danielm3         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:14:36 by danielm3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ char	*ft_strdup(const char *s)
 	size_t	i;
 	char	*dup;
 
+	i = 0;
 	len = ft_strlen(s);
 	dup = (char *)malloc(len + 1);
 	if (!dup)
 		return (NULL);
-	i = 0;
 	while (i < len)
 	{
 		dup[i] = s[i];
