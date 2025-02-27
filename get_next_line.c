@@ -6,7 +6,7 @@
 /*   By: danielm3 <danielm3@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:57:02 by danielm3          #+#    #+#             */
-/*   Updated: 2025/02/25 19:58:38 by danielm3         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:13:29 by danielm3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 	}
 	if (dirtyline)
 	{
-		while (!ft_strchr(dirtyline, '\n') && readbytes > 0)
+		while (!ft_strchr(dirtyline, '\n'))
 		{
 			buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char)); // malloc
 			if (!buffer)
@@ -77,9 +77,16 @@ char	*get_next_line(int fd)
 					return (NULL);
 				free(buffer);
 				free(temp);
+				if (readbytes < BUFFER_SIZE)
+				{
+					readbytes = 0;
+					return(dirtyline);
+				}
 			}
 			else
+			{
 				return (NULL);
+			}
 		}
 		if (ft_strchr(dirtyline, '\n'))
 		{
